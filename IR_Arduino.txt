@@ -1,0 +1,23 @@
+int irSensor = 2;    // IR sensor output pin connected to digital pin 2
+int led = 13;        // Using Arduino in-built LED (Pin 13)
+
+void setup() {
+  pinMode(irSensor, INPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int sensorValue = digitalRead(irSensor);  
+
+  if (sensorValue == LOW) {     // IR detects object (most IR sensors output LOW when object present)
+    digitalWrite(led, HIGH);
+    Serial.println("Object Detected!");
+  } 
+  else {                       // No object
+    digitalWrite(led, LOW);
+    Serial.println("No Object");
+  }
+
+  delay(200);
+}

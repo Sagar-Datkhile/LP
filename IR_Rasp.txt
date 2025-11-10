@@ -1,0 +1,23 @@
+import RPi.GPIO as GPIO
+import time
+
+# GPIO pin where IR sensor output is connected
+IR_PIN = 17
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(IR_PIN, GPIO.IN)
+
+print("IR Sensor Test Started... Press CTRL+C to stop")
+
+try:
+    while True:
+        if GPIO.input(IR_PIN) == 0:
+            print("Object Detected!")
+        else:
+            print("No Object")
+        
+        time.sleep(0.3)
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    print("Program Stopped")

@@ -1,0 +1,42 @@
+import RPi.GPIO as GPIO
+import time
+
+# Pin setup
+TRIG = 23
+ECHO = 24
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(TRIG, GPIO.OUT)
+GPIO.setup(ECHO, GPIO.IN)
+
+print("Ultrasonic Sensor - Distance Measurement")
+time.sleep(2)
+
+try:
+    while True:
+        # Send a 10µs pulse to trigger
+        GPIO.output(TRIG, False)
+        time.sleep(0.05)
+        GPIO.output(TRIG, True)
+        time.sleep(0.00001)
+        GPIO.output(TRIG, False)
+
+        # Wait for echo
+        while GPIO.input(ECHO) == 0:
+            pulse_start = time.time()
+        while GPIO.input(ECHO) == 1:
+            pulse_end = time.time()
+
+        # Time difference
+        pulse_duration = pulse_end - pulse_start
+
+        # Speed of sound = 34300 cm/s
+        distance = pulse_duration * 34300 / 2
+
+        print(f"Distance: {distance:.2f} cm")
+
+        time.sleep(0.5)
+
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    print("Measurement Stopped")

@@ -1,0 +1,33 @@
+// Pins for Ultrasonic Sensor
+const int trigPin = 9;
+const int echoPin = 10;
+
+// Pin for LM35 Sensor
+const int lm35Pin = A0;
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  Serial.println("Ultrasonic + LM35 Sensor Reading");
+}
+
+void loop() {
+  // ----- ULTRASONIC DISTANCE -----
+  long duration;
+  float distance;
+
+  // Trigger pulse
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read echo
+  duration = pulseIn(echoPin, HIGH);
+
+  // Calculate distance in cm
+  distance = duration * 0.034 / 2; // (speed of sound = 0.034 cm/us)

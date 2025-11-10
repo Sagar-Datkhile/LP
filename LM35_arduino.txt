@@ -1,0 +1,15 @@
+// ----- LM35 TEMPERATURE -----
+  int sensorValue = analogRead(lm35Pin);
+  float mv = sensorValue * (5000.0 / 1023.0);   // Convert ADC value to millivolts
+  float tempC = mv / 10.0;                      // 10mV = 1°C for LM35
+
+  // ----- PRINT VALUES -----
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.print(" cm");
+
+  Serial.print("   |   Temperature: ");
+  Serial.print(tempC);
+  Serial.println(" °C");
+
+  delay(500);
