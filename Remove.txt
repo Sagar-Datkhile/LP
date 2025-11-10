@@ -1,0 +1,13 @@
+Remove USB Events from Kernel Logs:
+
+sudo truncate -s 0 /var/log/kern.log
+sudo truncate -s 0 /var/log/syslog
+sudo truncate -s 0 /var/log/dmesg
+
+
+Check:
+dmesg | grep -i usb
+sudo truncate -s 0 /var/log/auth.log
+sudo truncate -s 0 /var/log/messages
+sudo truncate -s 0 /var/log/user.log
+
