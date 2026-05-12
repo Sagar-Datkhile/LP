@@ -1,0 +1,28 @@
+# Simple Expert System for IT Support
+
+print("Expert System (type 'exit' to stop)")
+
+while True:
+    user = input("Enter your problem: ")
+
+    if user == "Printer not working":
+        print("Check power and connection")
+
+    elif user == "Can't log in":
+        print("Check username and password")
+
+    elif user == "Software not installing":
+        print("Check system requirements")
+
+    elif user == "Internet not working":
+        print("Restart router")
+
+    elif user == "Email not sending":
+        print("Check email settings")
+
+    elif user == "exit":
+        print("Goodbye!")
+        break
+
+    else:
+        print("No solution found")

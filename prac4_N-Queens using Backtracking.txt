@@ -1,0 +1,46 @@
+# N-Queens using Backtracking (Simple)
+
+def solve(n):
+    board = [-1]*n   # store queen positions
+
+    # check if safe to place queen
+    def safe(r, c):
+        for i in range(r):
+            # same column OR diagonal check
+            if board[i] == c or abs(board[i]-c) == r-i:
+                return False
+        return True
+
+    # place queens row by row
+    def place(r):
+        if r == n:   # all queens placed
+            return True
+
+        for c in range(n):
+            if safe(r, c):
+                board[r] = c   # place queen
+
+                if place(r+1):  # move to next row
+                    return True
+
+                board[r] = -1   # backtrack (remove queen)
+
+        return False
+
+    place(0)
+
+    # print board
+    for i in range(n):
+        for j in range(n):
+            if board[i] == j:
+                print("Q", end=" ")
+            else:
+                print(".", end=" ")
+        print()
+
+    print("\n=== Code Execution Successful ===")
+
+
+# Main
+n = int(input("Enter number of queens: "))
+solve(n)

@@ -1,0 +1,35 @@
+#CODE 1
+
+# String
+text = "Hello World"
+
+# AND operation
+print("AND operation:")
+for ch in text:
+    print(chr(ord(ch) & 127), end="")
+
+# OR operation-OR with 127 produces ASCII values mostly 127 or non-printable characters
+print("\nOR operation:")
+for ch in text:
+    print(ord(ch) | 127, end=" ")
+
+# XOR operation
+print("\nXOR operation:")
+for ch in text:
+    print(ord(ch) ^ 127, end=" ")
+
+#CODE2
+
+s = "Hello World"
+
+and_result = [ord(c) & 127 for c in s]
+or_result  = [ord(c) | 127 for c in s]
+xor_result = [ord(c) ^ 127 for c in s]
+
+print("Original String:", s)
+
+print("AND Operation:", and_result)   # AND → same ASCII values 
+print("OR Operation :", or_result)    #OR → always 127 
+print("XOR Operation:", xor_result)  # XOR → changed ASCII values
+
+

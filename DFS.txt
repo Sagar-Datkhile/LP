@@ -1,0 +1,21 @@
+# -------- DFS --------
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+def dfs(node, visited):
+    print(node, end=" ")
+    visited.append(node)
+
+    for n in graph[node]:
+        if n not in visited:
+            dfs(n, visited)
+
+print("DFS Traversal:")
+dfs('A', [])

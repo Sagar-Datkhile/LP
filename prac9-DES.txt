@@ -1,0 +1,37 @@
+# Simple DES-like Encryption and Decryption
+
+def encrypt(text, key):
+    encrypted = ""
+
+    for ch in text:
+        # shift ASCII value (simple encryption step)
+        encrypted += chr(ord(ch) + key)
+
+    return encrypted
+
+
+def decrypt(text, key):
+    decrypted = ""
+
+    for ch in text:
+        # reverse shift
+        decrypted += chr(ord(ch) - key)
+
+    return decrypted
+
+
+# Plaintext
+plaintext = "SHRUTI"
+
+# Key (simple number)
+key = 3
+
+print("Plain Text:", plaintext)
+
+# Encryption
+cipher = encrypt(plaintext, key)
+print("Encrypted Text:", cipher)
+
+# Decryption
+plain = decrypt(cipher, key)
+print("Decrypted Text:", plain)

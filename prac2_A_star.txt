@@ -1,0 +1,41 @@
+graph = {
+    'A': [('B', 6), ('F', 3)],
+    'B': [('C', 3), ('D', 2)],
+    'C': [('E', 5)],
+    'D': [('E', 8)],
+    'E': [('J', 5)],
+    'F': [('G', 1)],
+    'G': [('I', 3)],
+    'I': [('J', 3)],
+    'J': []
+}
+
+h = {'A':10,'B':8,'C':5,'D':7,'E':3,'F':6,'G':5,'I':1,'J':0}
+
+def astar(start, goal):
+    open_list = [start]
+    g = {start: 0}
+    parent = {start: start}
+
+    while open_list:
+        # find minimum f(n)
+        n = min(open_list, key=lambda x: g[x] + h[x])
+
+        if n == goal:
+            path = []
+            while parent[n] != n:
+                path.append(n)
+                n = parent[n]
+            path.append(start)
+            print("Path found:", path[::-1])
+            return
+
+        open_list.remove(n)
+
+        for (m, cost) in graph[n]:
+            if m not in g or g[m] > g[n] + cost:
+                g[m] = g[n] + cost
+                parent[m] = n
+                open_list.append(m)
+
+astar('A', 'J')

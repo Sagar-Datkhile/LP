@@ -1,0 +1,71 @@
+# Rail Fence Cipher with key (rails)
+
+def encrypt(text, key):
+    rails = ['' for _ in range(key)]
+    row = 0
+    direction = 1
+
+    for ch in text:
+        rails[row] += ch
+
+        if row == 0:
+            direction = 1
+        elif row == key - 1:
+            direction = -1
+
+        row += direction
+
+    return ''.join(rails)
+
+
+def decrypt(text, key):
+    # simple reconstruction (basic exam level)
+    rails = ['' for _ in range(key)]
+    row = 0
+    direction = 1
+
+    for ch in text:
+        rails[row] += '*'
+
+        if row == 0:
+            direction = 1
+        elif row == key - 1:
+            direction = -1
+
+        row += direction
+
+    index = 0
+    result = ''
+
+    for i in range(key):
+        rails[i] = list(text[index:index+len(rails[i])])
+        index += len(rails[i])
+
+    row = 0
+    direction = 1
+
+    for i in range(len(text)):
+        result += rails[row][0]
+        rails[row].pop(0)
+
+        if row == 0:
+            direction = 1
+        elif row == key - 1:
+            direction = -1
+
+        row += direction
+
+    return result
+
+
+# Input
+msg = input("Enter message: ")
+key = int(input("Enter number of rails: "))
+
+# Process
+enc = encrypt(msg, key)
+dec = decrypt(enc, key)
+
+# Output
+print("Encrypted:", enc)
+print("Decrypted:", dec)

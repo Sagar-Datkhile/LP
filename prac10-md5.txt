@@ -1,0 +1,42 @@
+import java.security.MessageDigest;
+import java.util.Scanner;
+
+public class MD5Simple {
+    public static void main(String[] args) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String input = sc.nextLine();
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+
+        byte[] hash = md.digest(input.getBytes());
+
+        String result = "";
+
+        for (int i = 0; i < hash.length; i++) {
+            result += Integer.toHexString((hash[i] & 0xff) + 0x100).substring(1);
+        }
+
+        System.out.println("MD5 Hash: " + result);
+    }
+}
+
+
+#code2
+import hashlib
+
+# Input from user
+text = input("Enter string: ")
+
+# Create MD5 hash object
+md5_hash = hashlib.md5()
+
+# Encode input string and update hash
+md5_hash.update(text.encode())
+
+# Get hexadecimal digest
+result = md5_hash.hexdigest()
+
+print("MD5 Hash:", result)
