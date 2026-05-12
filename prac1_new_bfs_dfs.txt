@@ -1,0 +1,43 @@
+# -------- BFS --------
+
+from collections import deque
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['G'],
+    'F': [],
+    'G': []
+}
+
+def bfs(start):
+    queue = deque([start])
+    visited = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visited:
+            print(node, end=" ")
+            visited.append(node)
+
+            for n in graph[node]:
+                queue.append(n)
+print("Graph: ", graph)
+print("BFS Traversal:")
+bfs('A')
+print()
+
+
+def dfs(node, visited):
+    print(node, end=" ")
+    visited.append(node)
+
+    for n in graph[node]:
+        if n not in visited:
+            dfs(n, visited)
+
+print("DFS Traversal:")
+dfs('A', [])
